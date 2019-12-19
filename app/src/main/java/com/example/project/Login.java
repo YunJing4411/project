@@ -37,7 +37,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                final ProgressDialog mDialog=new ProgressDialog(MainActivity.this);
+                final ProgressDialog mDialog=new ProgressDialog(Login.this);
                 mDialog.setMessage("Please Wait");
                 mDialog.show();
                 tab_user.addValueEventListener(new ValueEventListener() {
@@ -50,17 +50,17 @@ public class Login extends AppCompatActivity {
                             User user=dataSnapshot.child(username.getText().toString()).getValue(User.class);
                             if(user.getPassword().equals(password.getText().toString()))
                             {
-                                Toast.makeText(MainActivity.this,"Sign in successfully!!",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this,"Sign in successfully!!",Toast.LENGTH_SHORT).show();
                             }
                             else
                             {
-                                Toast.makeText(MainActivity.this,"Sign in failed!!",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this,"Sign in failed!!",Toast.LENGTH_SHORT).show();
                             }
                         }
                         else
                         {
                             mDialog.dismiss();
-                            Toast.makeText(MainActivity.this,"User not exist!!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this,"User not exist!!",Toast.LENGTH_SHORT).show();
                         }
 
                     }
