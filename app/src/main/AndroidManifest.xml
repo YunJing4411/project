@@ -13,7 +13,6 @@
         <activity android:name=".Signup" />
         <activity android:name=".Chatroom" />
         <activity android:name=".ChatroomGroup" />
-        <activity android:name=".Login" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
