@@ -1,6 +1,7 @@
 package com.example.project;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,15 +20,16 @@ import com.google.firebase.database.ValueEventListener;
 public class Login extends AppCompatActivity {
 
     EditText password,username;
-    Button login;
+    Button login,signup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         password=findViewById(R.id.password);
         username=findViewById(R.id.username);
         login=findViewById(R.id.login);
+        signup=findViewById(R.id.signup);
         // user=new User();
 
         FirebaseDatabase database=FirebaseDatabase.getInstance();
@@ -70,6 +72,14 @@ public class Login extends AppCompatActivity {
 
                     }
                 });
+            }
+        });
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signUp=new Intent(Login.this,Signup.class);
+                startActivity(signUp);
+
             }
         });
     }
