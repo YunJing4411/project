@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.project.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         password=findViewById(R.id.password);
-        username=findViewById(R.id.username);
+        username=findViewById(R.id.Pusername);
         login=findViewById(R.id.login);
         signup=findViewById(R.id.signup);
         // user=new User();

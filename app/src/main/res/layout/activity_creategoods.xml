@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFE4B5"
+    tools:context=".creategoods">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="106dp"
+        android:layout_height="114dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        app:layout_constraintBottom_toBottomOf="@+id/setprice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/setname"
+        app:layout_constraintVertical_bias="0.552"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:id="@+id/setname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
+        android:text="設定品名"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/etname"
+        app:layout_constraintEnd_toStartOf="@+id/etname"
+        app:layout_constraintTop_toTopOf="@+id/etname" />
+
+    <EditText
+        android:id="@+id/etname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="148dp"
+        android:ems="10"
+        android:hint="請輸入品名"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/etdescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/setprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        android:text="設定價錢"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/pp"
+        app:layout_constraintEnd_toStartOf="@+id/pp"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/etname"
+        app:layout_constraintVertical_bias="0.548" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:layout_marginBottom="13dp"
+        android:text="商品描述"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/etdescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <EditText
+        android:id="@+id/etprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:ems="10"
+        android:hint="請輸入價錢"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etname" />
+
+    <EditText
+        android:id="@+id/etdescription"
+        android:layout_width="377dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="188dp"
+        android:ellipsize="none"
+        android:ems="10"
+        android:hint="描述您所販售的商品，包含買家可能感興趣的任何細節。"
+        android:inputType="textMultiLine"
+        android:maxLines="5"
+        android:singleLine="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="200dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="109dp"
+        android:layout_marginLeft="109dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="102dp"
+        android:layout_marginRight="102dp"
+        android:layout_marginBottom="36dp"
+        android:background="#FFFFFF"
+        android:onClick="publish"
+        android:text="刊登"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etdescription"
+        app:layout_constraintVertical_bias="0.3" />
+</androidx.constraintlayout.widget.ConstraintLayout>

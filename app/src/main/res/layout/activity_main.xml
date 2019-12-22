@@ -13,7 +13,7 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/Pusername"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -44,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/Pusername"
         android:importantForAutofill="no" />
 
     <Button
@@ -102,8 +102,8 @@
         android:layout_height="130dp"
         android:layout_marginLeft="340dp"
         android:contentDescription="@string/todo"
-        app:layout_constraintBottom_toTopOf="@+id/username"
-        app:layout_constraintEnd_toStartOf="@+id/username"
+        app:layout_constraintBottom_toTopOf="@+id/Pusername"
+        app:layout_constraintEnd_toStartOf="@+id/Pusername"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:srcCompat="@drawable/icon"

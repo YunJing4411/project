@@ -2,6 +2,7 @@ package com.example.project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -28,85 +29,80 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Chatroom extends AppCompatActivity {
+    private ChatArrayAdapter adapter = null;
 
-    private ChatArrayAdapter adapter=null;
-    private static final int LIST_CHAT=1;
-    private Handler handler=new Handler()
-    {
+    private static final int LIST_CHAT = 1;
+    private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case LIST_CHAT: {
-                    List<Chat> chat = (List<Chat>)msg.obj;
-                    refreshChatList(chat);
+                    List<Chat> chats = (List<Chat>)msg.obj;
+                    refreshHotelList(chats);
                     break;
                 }
             }
         }
     };
-    private void refreshChatList(List<Chat> chat) {
-        if(adapter!=null)
-        {
-            adapter.clear();
-            adapter.addAll(chat);
-        }
-
-
+    private void refreshHotelList(List<Chat> chats) {
+        adapter.clear();
+        adapter.addAll(chats);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatroom);
-
-        ListView lv=(ListView)findViewById(R.id.c);
-        ChatArrayAdapter A=new ChatArrayAdapter(this,new ArrayList<Chat>());
-        lv.setAdapter(A);
+        ListView chat = (ListView)findViewById(R.id.c);
+        adapter = new ChatArrayAdapter(this, new ArrayList<Chat>());
+        chat.setAdapter(adapter);
 
         getChatFromFirebase();
     }
     class FirebaseThread extends Thread
     {
         private DataSnapshot dataSnapshot;
-        public  FirebaseThread(DataSnapshot dataSnapshot) { this.dataSnapshot=dataSnapshot; }
+        public FirebaseThread(DataSnapshot dataSnapshot) {
+            this.dataSnapshot = dataSnapshot;
+        }
         @Override
-        public void run()
-        {
-            List<Chat> lschat=new ArrayList<>();
-            for(DataSnapshot ds : dataSnapshot.getChildren())
-            {
-                DataSnapshot account = ds.child("accout");
-                DataSnapshot content = ds.child("content");
-                String Account = (String)account.getValue();
-                String Content = (String)content.getValue();
+        public void run() {
+            List<Chat> lsChat = new ArrayList<>();
+            for(DataSnapshot ds : dataSnapshot.getChildren()){
+                DataSnapshot dsaccount = ds.child("accout");
+                DataSnapshot dscontent = ds.child("content");
 
-                Chat achat=new Chat();
-                achat.setContent(Content);
-                achat.setUser(Account);
-                lschat.add(achat);
-                Log.v("chatroom", Account + ";" + Content);
+                String account = (String)dsaccount.getValue();
+                String content = (String)dscontent.getValue();
 
-                Message msg=new Message();
-                msg.what=LIST_CHAT;
-                msg.obj=lschat;
-                handler.sendMessage(msg);
+                Chat aChat = new Chat();
+                aChat.setUser(account);
+                aChat.setContent(content);
+
+
+                lsChat.add(aChat);
+
+                Log.v("chatroom", account + " " + content );
+
+
             }
+            Message msg = new Message();
+            msg.what = LIST_CHAT;
+            msg.obj = lsChat;
+            handler.sendMessage(msg);
         }
     }
     private void getChatFromFirebase()
     {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("chatroom");
-        myRef.addValueEventListener(new ValueEventListener()
-        {
+        DatabaseReference reference = database.getReference("chatroom");
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void
-            onDataChange(DataSnapshot dataSnapshot)
-            {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 new FirebaseThread(dataSnapshot).start();
             }
+
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError)
-            {
-                Log.v("chatroom",databaseError.getMessage());
+            public void onCancelled(DatabaseError databaseError) {
+                Log.v("chatroom", databaseError.getMessage());
             }
         });
     }
@@ -122,21 +118,20 @@ public class Chatroom extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(int position, View convertView, ViewGroup parent){
             LayoutInflater inflater = LayoutInflater.from(context);
-            LinearLayout itemlayout = null;
-            if (convertView == null) {
-                itemlayout = (LinearLayout) inflater.inflate(R.layout.chatroom_item, null);
-            } else {
-                itemlayout = (LinearLayout) convertView;
+            ConstraintLayout itemlayout = null;
+            if(convertView == null){
+                itemlayout = (ConstraintLayout) inflater.inflate(R.layout.chatroom_item, null);
+            }else{
+                itemlayout = (ConstraintLayout)convertView;
             }
-            Chat item = (Chat) getItem(position);
-            TextView tvUser = (TextView) itemlayout.findViewById(R.id.tvuser);
+            Chat item = (Chat)getItem(position);
+            TextView tvTxet = (TextView)itemlayout.findViewById(R.id.tvtext);
+            tvTxet.setText(item.getContent());
+            TextView tvUser = (TextView)itemlayout.findViewById(R.id.tvuser);
             tvUser.setText(item.getUser());
-            TextView tvContent = (TextView) itemlayout.findViewById(R.id.tvtext);
-            tvContent.setText(item.getContent());
             return itemlayout;
         }
     }
-
 }
