@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 public class product_page extends AppCompatActivity {
 
+    /**/
     Button btnIncrease,btnDecrease;
     private EditText etAmount;
     private int num=1;
