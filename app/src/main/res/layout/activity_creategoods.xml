@@ -49,16 +49,18 @@
         android:id="@+id/setprice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="17dp"
         android:layout_marginRight="17dp"
         android:text="設定價錢"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/pp"
-        app:layout_constraintEnd_toStartOf="@+id/pp"
+        app:layout_constraintBottom_toBottomOf="@+id/etprice"
+        app:layout_constraintEnd_toStartOf="@+id/etprice"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/etname"
-        app:layout_constraintVertical_bias="0.548" />
+        app:layout_constraintVertical_bias="0.166" />
 
     <TextView
         android:id="@+id/description"
