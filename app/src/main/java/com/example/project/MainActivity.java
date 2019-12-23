@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText password,username;
     Button login,signup;
+    public int i=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,41 +33,60 @@ public class MainActivity extends AppCompatActivity {
         signup=findViewById(R.id.signup);
         // user=new User();
 
-        FirebaseDatabase database=FirebaseDatabase.getInstance();
-        final DatabaseReference tab_user=database.getReference("User");
+        final FirebaseDatabase database=FirebaseDatabase.getInstance();
+        final DatabaseReference tab_user=database.getReference("user");
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                Intent signin=new Intent(MainActivity.this,share.class);
-                startActivity(signin);
+                //  database.getReference().removeValue();
                 final ProgressDialog mDialog=new ProgressDialog(MainActivity.this);
                 mDialog.setMessage("Please Wait");
                 mDialog.show();
+
                 tab_user.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot)
                     {
-                        if(dataSnapshot.child(username.getText().toString()).exists())
+                        i=0;
+                        if(dataSnapshot.child(""+i).exists())
                         {
                             mDialog.dismiss();
-                            User user=dataSnapshot.child(username.getText().toString()).getValue(User.class);
-                            if(user.getPassword().equals(password.getText().toString()))
+
+                            for(i=0;i<(int)dataSnapshot.getChildrenCount();i++)
                             {
-                                Toast.makeText(MainActivity.this,"Sign in successfully!!",Toast.LENGTH_SHORT).show();
+                                User user=dataSnapshot.child(""+i).getValue(User.class);
+                                if(user.getName().equals(username.getText().toString()))
+                                {
+                                    if(user.getPassword().equals(password.getText().toString()))
+                                    {
+                                        Toast.makeText(MainActivity.this,"Sign in successfully!!",Toast.LENGTH_SHORT).show();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(MainActivity.this,"Sign in failed!!",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                else
+                                {
+                                    if(i>=(int)dataSnapshot.getChildrenCount())
+                                    {
+                                        mDialog.dismiss();
+                                        Toast.makeText(MainActivity.this,"User not exist!!",Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+
                             }
-                            else
-                            {
-                                Toast.makeText(MainActivity.this,"Sign in failed!!",Toast.LENGTH_SHORT).show();
-                            }
+
                         }
                         else
                         {
                             mDialog.dismiss();
                             Toast.makeText(MainActivity.this,"User not exist!!",Toast.LENGTH_SHORT).show();
                         }
-                        /*hi*/
+
                     }
 
                     @Override

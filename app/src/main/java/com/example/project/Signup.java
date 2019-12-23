@@ -21,28 +21,27 @@ import android.os.Bundle;
 
 public class Signup extends AppCompatActivity {
 
-    EditText name,mail,password;
+    EditText Name, Mail, PassWord;
     Button SignUp;
 
-    /*hiiiiiiiiiiiiiiiii*/
+    private int i, j, count = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        name = (EditText)findViewById(R.id.Name);
-        mail = (EditText)findViewById(R.id.Email);
-        password = (EditText)findViewById(R.id.Password);
-        SignUp = (Button)findViewById(R.id.SignUp);
+        Name = findViewById(R.id.Name);
+        Mail =  findViewById(R.id.Email);
+        PassWord =  findViewById(R.id.Password);
+        SignUp =  findViewById(R.id.SignUp);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference table_user = database.getReference("User");
+        final DatabaseReference table_user = database.getReference("user");
 
-        SignUp.setOnClickListener(new View.OnClickListener()
-        {
+        SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 final ProgressDialog mDialog = new ProgressDialog(Signup.this);
                 mDialog.setMessage("Please waiting....");
                 mDialog.show();
@@ -50,18 +49,30 @@ public class Signup extends AppCompatActivity {
                 table_user.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.child(name.getText().toString()).exists()){
+                        count = (int) dataSnapshot.getChildrenCount();
+                        // for(i=0;i<count;i++)
+                        //{
+                        User userex = dataSnapshot.child("" + 0).getValue(User.class);
+                        if (userex.getName().equals(Name.getText().toString())) {
                             mDialog.dismiss();
                             Toast.makeText(Signup.this, "Name already exist !", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
+                        } else {
+                            j = count + 1;
+                            count = j - 1;
+
                             mDialog.dismiss();
-                            User user = new User(name.getText().toString(), mail.getText().toString(), password.getText().toString());
-                            table_user.child(name.getText().toString()).setValue(user);
-                            Toast.makeText(Signup.this, "Sign up successful !", Toast.LENGTH_SHORT).show();
-                            finish();
+                            User user = new User(Mail.getText().toString(), Name.getText().toString(), PassWord.getText().toString());
+
+                            for (i = 0; i < 1; i++) {
+                                table_user.child("2").setValue(user);
+                                Toast.makeText(Signup.this, "Sign up successful !", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+
+
                         }
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
