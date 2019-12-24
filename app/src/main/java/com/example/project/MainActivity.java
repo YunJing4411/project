@@ -49,40 +49,18 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot)
                     {
-                        i=0;
-                        if(dataSnapshot.child(""+i).exists())
+                        if(dataSnapshot.child(username.getText().toString()).exists())
                         {
                             mDialog.dismiss();
-
-                            for(i=0;i<(int)dataSnapshot.getChildrenCount();i++)
+                            User user=dataSnapshot.child(username.getText().toString()).getValue(User.class);
+                            if(user.getPassword().equals(password.getText().toString()))
                             {
-                                User user=dataSnapshot.child(""+i).getValue(User.class);
-                                if(user.getName().equals(username.getText().toString()))
-                                {
-                                    if(user.getPassword().equals(password.getText().toString()))
-                                    {
-
-                                        Toast.makeText(MainActivity.this,"Sign in successfully!!",Toast.LENGTH_SHORT).show();
-                                        Intent  share=new Intent(MainActivity.this,share.class);
-                                        startActivity(share);
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(MainActivity.this,"Sign in failed!!",Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                                else
-                                {
-                                    if(i>=(int)dataSnapshot.getChildrenCount())
-                                    {
-                                        mDialog.dismiss();
-                                        Toast.makeText(MainActivity.this,"User not exist!!",Toast.LENGTH_SHORT).show();
-                                    }
-
-                                }
-
+                                Toast.makeText(MainActivity.this,"Sign in successfully!!",Toast.LENGTH_SHORT).show();
                             }
-
+                            else
+                            {
+                                Toast.makeText(MainActivity.this,"Sign in failed!!",Toast.LENGTH_SHORT).show();
+                            }
                         }
                         else
                         {

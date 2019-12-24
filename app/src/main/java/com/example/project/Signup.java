@@ -46,33 +46,31 @@ public class Signup extends AppCompatActivity {
                 mDialog.setMessage("Please waiting....");
                 mDialog.show();
 
-                table_user.addValueEventListener(new ValueEventListener() {
+                table_user.addValueEventListener(new ValueEventListener()
+                {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        count = (int) dataSnapshot.getChildrenCount();
-                        // for(i=0;i<count;i++)
-                        //{
-                        User userex = dataSnapshot.child("" + 0).getValue(User.class);
-                        if (userex.getName().equals(Name.getText().toString())) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                    {
+
+                        if (dataSnapshot.child(Name.getText().toString()).exists())
+                        {
                             mDialog.dismiss();
                             Toast.makeText(Signup.this, "Name already exist !", Toast.LENGTH_SHORT).show();
-                        } else {
-                            j = count + 1;
-                            count = j - 1;
+                        }
+                        else
+                        {
 
                             mDialog.dismiss();
-                            User user = new User(Mail.getText().toString(), Name.getText().toString(), PassWord.getText().toString());
-
-                            for (i = 0; i < 1; i++) {
-                                table_user.child("2").setValue(user);
-                                Toast.makeText(Signup.this, "Sign up successful !", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
+                            User user = new User(Mail.getText().toString(),Name.getText().toString(),PassWord.getText().toString());
+                            table_user.child(Name.getText().toString()).setValue(user);
+                            Toast.makeText(Signup.this, "Sign up successful !", Toast.LENGTH_SHORT).show();
+                            finish();
 
 
                         }
-                    }
 
+
+                    }
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
