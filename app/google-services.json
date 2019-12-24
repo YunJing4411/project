@@ -1,42 +1,79 @@
 {
   "project_info": {
-    "project_number": "661441500187",
-    "firebase_url": "https://project-1beb1.firebaseio.com",
-    "project_id": "project-1beb1",
-    "storage_bucket": "project-1beb1.appspot.com"
+    "project_number": "950818635268",
+    "firebase_url": "https://fucking-bullshit-31db1.firebaseio.com",
+    "project_id": "fucking-bullshit-31db1",
+    "storage_bucket": "fucking-bullshit-31db1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:661441500187:android:db74e21602de98ec51d4be",
+        "mobilesdk_app_id": "1:950818635268:android:3f5de338ceb3a4255ebf51",
         "android_client_info": {
-          "package_name": "com.example.project"
+          "package_name": "com.example.fuckingbullshit"
         }
       },
       "oauth_client": [
         {
-          "client_id": "661441500187-dotp2t8g93rpibpvpamd4qf9d4gcclbu.apps.googleusercontent.com",
+          "client_id": "950818635268-od26r6006nes26qeshnr7ml6hn55tb1g.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.project",
-            "certificate_hash": "c861cf4e7e4636dd883312a93f459376b6d29b56"
+            "package_name": "com.example.fuckingbullshit",
+            "certificate_hash": "69efaa0935b2322b3bdc7058b83d47d2dbbce0a4"
           }
         },
         {
-          "client_id": "661441500187-p3b5ijsgvcav4ag8ek812nvmffmok019.apps.googleusercontent.com",
+          "client_id": "950818635268-ao82ut3ljpsa157btibd4ah3lljdiudt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD7XPKZS9zc14xdNLq7dJ5uRM1bQF5soWk"
+          "current_key": "AIzaSyCdvP_nyBIoyv1rkHwKLt_ZrbTUfIJWwcg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "661441500187-p3b5ijsgvcav4ag8ek812nvmffmok019.apps.googleusercontent.com",
+              "client_id": "950818635268-ao82ut3ljpsa157btibd4ah3lljdiudt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950818635268:android:507ba1865b4bdad55ebf51",
+        "android_client_info": {
+          "package_name": "com.example.project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950818635268-qptjntbmaeeaps1tkkqb6jhe491eik34.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.project",
+            "certificate_hash": "69efaa0935b2322b3bdc7058b83d47d2dbbce0a4"
+          }
+        },
+        {
+          "client_id": "950818635268-ao82ut3ljpsa157btibd4ah3lljdiudt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdvP_nyBIoyv1rkHwKLt_ZrbTUfIJWwcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950818635268-ao82ut3ljpsa157btibd4ah3lljdiudt.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -53,9 +53,11 @@ public class MainActivity extends AppCompatActivity {
                         {
                             mDialog.dismiss();
                             User user=dataSnapshot.child(username.getText().toString()).getValue(User.class);
-                            if(user.getPassword().equals(password.getText().toString()))
+                              if(user.getPassword().equals(password.getText().toString()))
                             {
                                 Toast.makeText(MainActivity.this,"Sign in successfully!!",Toast.LENGTH_SHORT).show();
+                                Intent mainshare=new Intent(MainActivity.this,share.class);
+                                startActivity(mainshare);
                             }
                             else
                             {
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+
             }
         });
         signup.setOnClickListener(new View.OnClickListener() {
