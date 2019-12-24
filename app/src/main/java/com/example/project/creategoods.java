@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,9 +97,17 @@ public class creategoods extends AppCompatActivity {
         Log.v("DB:",name+" "+price+" "+des);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("");
-        goodsinfo good1 = new goodsinfo(name,price,des,uri);
+
+        goodsinfo good1 = new goodsinfo(name,price,des,BitMapToString(pic));
         ref.child("Goods").child(String.valueOf(i)).setValue(good1);
         Log.v("i:",String.valueOf(i));
+    }
+    public String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream ByteStream=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, ByteStream);
+        byte [] b=ByteStream.toByteArray();
+        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
     }
     private Bitmap getBitmapFromUri(Uri uri) {
         try {

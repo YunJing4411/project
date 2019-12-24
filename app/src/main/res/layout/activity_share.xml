@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".share">
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="155dp"
+        android:layout_height="107dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="94dp" />
+
     <Button
         android:id="@+id/talk"
         android:layout_width="45dp"
@@ -113,7 +120,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shopping"
-        app:layout_constraintVertical_bias="0.181" />
+        app:layout_constraintVertical_bias="0.181" >
+
+    </ListView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,13 +1,15 @@
 package com.example.project;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 
 public class GGoods {
     private String name;
-    private String pic;
+    private Bitmap pic;
     private String des;
     private String price;
 
@@ -19,11 +21,11 @@ public class GGoods {
         this.name = name;
     }
 
-    public String getPic() {
+    public Bitmap getPic() {
         return pic;
     }
 
-    public void setPic(String pic) {
+    public void setPic(Bitmap pic) {
         this.pic = pic;
     }
 

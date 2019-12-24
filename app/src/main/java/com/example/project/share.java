@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,7 @@ public class share extends AppCompatActivity {
     ListView lvgood;
     ArrayList<String> picture;
     ArrayList<Bitmap> picture1;
+    ImageView im;
     private String name,price,des,pic;
     private GoodsArrayAdapter adapter = null;
     private static final int LIST_Goods = 1;
@@ -67,10 +69,13 @@ public class share extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share);
+        picture=new ArrayList<>();
+        picture1=new ArrayList<>();
         lvgood=findViewById(R.id.lvgoods);
         adapter = new GoodsArrayAdapter(this, new ArrayList<GGoods>());
         lvgood.setAdapter(adapter);
         getGoodsFromFirebase();
+        im=findViewById(R.id.imageView6);
 
     }
 
@@ -110,6 +115,7 @@ public class share extends AppCompatActivity {
     }
 
 
+
     class FirebaseThread extends Thread
     {
         private DataSnapshot dataSnapshot;
@@ -128,20 +134,23 @@ public class share extends AppCompatActivity {
                 des=(String)dsdes.getValue();
                 price=(String)dsprice.getValue();
                 pic=(String)dspic.getValue();
-                //picture.add(pic);
+
                 GGoods agoods = new GGoods();
                 agoods.setName(name);
-                agoods.setPic(pic);
-                lsgoods.add(agoods);
+                agoods.setPic(stringToBitmap(pic));
 
+                lsgoods.add(agoods);
                 Log.v("share", name + " " + price+" "+des+" "+pic);
             }
+
             Message msg = new Message();
             msg.what = LIST_Goods;
             msg.obj = lsgoods;
             handler.sendMessage(msg);
         }
+
     }
+
     private void getGoodsFromFirebase()
     {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -151,7 +160,6 @@ public class share extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 new FirebaseThread(dataSnapshot).start();
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.v("share", databaseError.getMessage());
@@ -159,7 +167,6 @@ public class share extends AppCompatActivity {
         });
     }
 
-    static  int count=0;
     class GoodsArrayAdapter extends ArrayAdapter<GGoods>
     {
         Context context;
@@ -170,7 +177,8 @@ public class share extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent){
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
             LayoutInflater inflater = LayoutInflater.from(context);
             ConstraintLayout itemlayout = null;
             if(convertView == null){
@@ -179,24 +187,31 @@ public class share extends AppCompatActivity {
                 itemlayout = (ConstraintLayout)convertView;
             }
             GGoods item = (GGoods)getItem(position);
-            ImageView impic=(ImageView)findViewById(R.id.gpic) ;
+            ImageView PIC=(ImageView)findViewById(R.id.gpic) ;
+            im.setImageBitmap(item.getPic());
 
-            //impic.setImageBitmap(getBitmapFromUri(Uri.parse(item.getPic())));
+            PIC.setImageResource(R.drawable.add);
             TextView tvTxet = (TextView)itemlayout.findViewById(R.id.gname);
             tvTxet.setText(item.getName());
             return itemlayout;
         }
-        public Bitmap getBitmapFromUri(Uri uri) {
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), uri);
-                return bitmap;
-            } catch (Exception e) {
-                Log.e("[Android]", e.getMessage());
-                Log.e("[Android]", "目录为：" + uri);
-                e.printStackTrace();
-                return null;
-            }
-        }
+
+
+
     }
 
+    public Bitmap stringToBitmap(String string)
+    {
+        // 将字符串转换成Bitmap类型
+        Bitmap bitmap = null;
+        try {
+            byte[] bitmapArray;
+            bitmapArray = Base64.decode(string, Base64.DEFAULT);
+            bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0,
+                    bitmapArray.length);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
 }
