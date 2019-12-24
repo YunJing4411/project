@@ -1,5 +1,6 @@
 package com.example.project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -20,6 +21,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -46,7 +48,6 @@ public class share extends AppCompatActivity {
     ListView lvgood;
     ArrayList<String> picture;
     ArrayList<Bitmap> picture1;
-    ImageView im;
     private String name,price,des,pic;
     private GoodsArrayAdapter adapter = null;
     private static final int LIST_Goods = 1;
@@ -75,7 +76,15 @@ public class share extends AppCompatActivity {
         adapter = new GoodsArrayAdapter(this, new ArrayList<GGoods>());
         lvgood.setAdapter(adapter);
         getGoodsFromFirebase();
-        im=findViewById(R.id.imageView6);
+        lvgood.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent productpage = new Intent(share.this, product_page.class);
+                productpage.putExtra("商品項目",position);
+                startActivity(productpage);
+            }
+        });
 
     }
 
@@ -96,7 +105,6 @@ public class share extends AppCompatActivity {
         //取得照片後返回此畫面
         startActivityForResult(photo, 0);
     }
-    public static final int KITKAT_VALUE = 1002;
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
@@ -171,15 +179,15 @@ public class share extends AppCompatActivity {
     {
         Context context;
 
-        public GoodsArrayAdapter(Context context, List<GGoods> items) {
+        public GoodsArrayAdapter(@NonNull Context context, List<GGoods> items) {
             super(context, 0, items);
             this.context = context;
         }
-
+        @NonNull
         @Override
         public View getView(int position, View convertView, ViewGroup parent)
         {
-            LayoutInflater inflater = LayoutInflater.from(context);
+            LayoutInflater inflater = LayoutInflater.from(this.context);
             ConstraintLayout itemlayout = null;
             if(convertView == null){
                 itemlayout = (ConstraintLayout) inflater.inflate(R.layout.goods, null);
@@ -187,10 +195,8 @@ public class share extends AppCompatActivity {
                 itemlayout = (ConstraintLayout)convertView;
             }
             GGoods item = (GGoods)getItem(position);
-            ImageView PIC=(ImageView)findViewById(R.id.gpic) ;
-            im.setImageBitmap(item.getPic());
-
-            PIC.setImageResource(R.drawable.add);
+            ImageView PIC=(ImageView)itemlayout.findViewById(R.id.gpic) ;
+            PIC.setImageBitmap(item.getPic());
             TextView tvTxet = (TextView)itemlayout.findViewById(R.id.gname);
             tvTxet.setText(item.getName());
             return itemlayout;
