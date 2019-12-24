@@ -128,13 +128,13 @@ public class share extends AppCompatActivity {
                 des=(String)dsdes.getValue();
                 price=(String)dsprice.getValue();
                 pic=(String)dspic.getValue();
-                picture.add(pic);
+                //picture.add(pic);
                 GGoods agoods = new GGoods();
                 agoods.setName(name);
                 agoods.setPic(pic);
                 lsgoods.add(agoods);
 
-                Log.v("share", name + " " + price+" "+des);
+                Log.v("share", name + " " + price+" "+des+" "+pic);
             }
             Message msg = new Message();
             msg.what = LIST_Goods;
@@ -186,7 +186,7 @@ public class share extends AppCompatActivity {
             tvTxet.setText(item.getName());
             return itemlayout;
         }
-        private Bitmap getBitmapFromUri(Uri uri) {
+        public Bitmap getBitmapFromUri(Uri uri) {
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), uri);
                 return bitmap;
