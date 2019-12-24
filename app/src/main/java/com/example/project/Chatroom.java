@@ -37,13 +37,13 @@ public class Chatroom extends AppCompatActivity {
             switch (msg.what) {
                 case LIST_CHAT: {
                     List<Chat> chats = (List<Chat>)msg.obj;
-                    refreshHotelList(chats);
+                    refreshChatList(chats);
                     break;
                 }
             }
         }
     };
-    private void refreshHotelList(List<Chat> chats) {
+    private void refreshChatList(List<Chat> chats) {
         adapter.clear();
         adapter.addAll(chats);
     }

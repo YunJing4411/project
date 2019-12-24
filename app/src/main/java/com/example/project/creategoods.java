@@ -29,6 +29,7 @@ import java.util.List;
 public class creategoods extends AppCompatActivity {
     Bitmap pic;
     ImageView IM;
+    ArrayList<String> picture;
     EditText edname,edprice,eddes;
     String name,price,des,uri;
     int i=0;
@@ -36,8 +37,10 @@ public class creategoods extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creategoods);
+        picture=new ArrayList<>();
         Intent createGoods=getIntent();
         uri=createGoods.getStringExtra("上傳商品");
+        Log.v("上傳",uri);
         Uri myUri = Uri.parse(uri);
         pic=getBitmapFromUri(myUri);
         IM=findViewById(R.id.imageView2);
@@ -51,8 +54,10 @@ public class creategoods extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
-                for(DataSnapshot ds : dataSnapshot.getChildren()) i++;
-
+                for(DataSnapshot ds : dataSnapshot.getChildren())
+                {
+                    i++;
+                }
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -72,6 +77,11 @@ public class creategoods extends AppCompatActivity {
         {
             updatetofirebase();
             Intent Home=new Intent(this,share.class);
+            Home.putStringArrayListExtra("圖片",picture);
+            for(int i=0;i<picture.size();i++)
+            {
+                Log.v("123",picture.get(i));
+            }
             startActivity(Home);
         }
 

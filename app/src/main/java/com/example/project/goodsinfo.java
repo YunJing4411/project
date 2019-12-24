@@ -1,10 +1,12 @@
 package com.example.project;
 
+import android.graphics.Bitmap;
+
 public class goodsinfo {
     private  String name;
     private  String price;
     private  String description;
-    private  String pic;
+    private String pic;
 
 
 

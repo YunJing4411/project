@@ -61,7 +61,10 @@ public class MainActivity extends AppCompatActivity {
                                 {
                                     if(user.getPassword().equals(password.getText().toString()))
                                     {
+
                                         Toast.makeText(MainActivity.this,"Sign in successfully!!",Toast.LENGTH_SHORT).show();
+                                        Intent  share=new Intent(MainActivity.this,share.class);
+                                        startActivity(share);
                                     }
                                     else
                                     {
