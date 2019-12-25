@@ -94,6 +94,12 @@ public class share extends AppCompatActivity {
         startActivity(chatroom);
     }
 
+    public void buy(View v)
+    {
+        Intent buycart=new Intent(share.this,Cart_main.class);
+        startActivity(buycart);
+    }
+
     public void newitem(View v)
     {
         //讀取圖片

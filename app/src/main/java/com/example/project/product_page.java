@@ -34,7 +34,7 @@ public class product_page extends AppCompatActivity {
     private int position=0;
     TextView tvname,tvprice,tvdes;
     ImageView impic;
-    Button btnIncrease,btnDecrease;
+    Button btnIncrease,btnDecrease,buynow;
     private EditText etAmount;
     private int num=1;
     private String name,price,des,pic;
@@ -66,6 +66,8 @@ public class product_page extends AppCompatActivity {
         impic=findViewById(R.id.product_img);
         btnDecrease=findViewById(R.id.btnDecrease);
         btnIncrease=findViewById(R.id.btnIncrease);
+        buynow=findViewById(R.id.buynow);
+
         etAmount=findViewById(R.id.etAmount);
         btnIncrease.setOnClickListener(new View.OnClickListener()
         {
@@ -91,9 +93,20 @@ public class product_page extends AppCompatActivity {
 
             }
         });
+
+        buynow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent cart=new Intent(product_page.this,Cart_main.class);
+                startActivity(cart);
+            }
+        });
         Intent share=getIntent();
         position= share.getIntExtra("商品項目",0);
         getGoodsFromFirebase();
+
+
 
     }
 

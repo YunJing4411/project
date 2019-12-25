@@ -27,7 +27,7 @@ import info.hoang8f.widget.FButton;
 */
 
 
-public class Cart_main {
+public class Cart_main extends AppCompatActivity{
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
