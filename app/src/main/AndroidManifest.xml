@@ -22,7 +22,6 @@
         <activity android:name=".creategoods" />
         <activity android:name=".share" />
         <activity android:name=".Signup" />
-        <activity android:name=".Chatroom" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
