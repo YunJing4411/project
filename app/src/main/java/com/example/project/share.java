@@ -90,7 +90,7 @@ public class share extends AppCompatActivity {
 
     public void chat(View v)
     {
-        Intent chatroom=new Intent(share.this,Chatroom.class);
+        Intent chatroom=new Intent(share.this,chatttt.class);
         startActivity(chatroom);
     }
 

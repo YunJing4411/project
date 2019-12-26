@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Chatroom extends AppCompatActivity {
-    private ChatArrayAdapter adapter = null;
+    private ChatArrayAdapter adapter=null;
 
     private static final int LIST_CHAT = 1;
     private Handler handler = new Handler() {
